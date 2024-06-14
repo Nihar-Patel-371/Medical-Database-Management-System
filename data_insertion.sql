@@ -1,4 +1,4 @@
-Data Entry:-
+-- Data Entry:-
 
 insert into pharmacy values(1,'abbott','bangalore',212-9765433,9001002003);
 insert into pharmacy values(2,'allergan','mumbai',222-9838212,9001002004);
