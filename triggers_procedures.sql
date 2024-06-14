@@ -1,4 +1,4 @@
-Queries:-
+-- Queries:-
 
 1) select name,salary
    from employee
@@ -27,7 +27,7 @@ Queries:-
    from employee e, pharmacy p
    where e.sex='f';
 
-Procedure:-
+-- Procedure:-
 
 1)create procedure update_medi as
   begin 
