@@ -1,0 +1,111 @@
+Table:-
+
+create table pharmacy
+(
+phid integer primary key,
+name varchar2(20),
+city varchar2(20),
+fax varchar2(20),
+phone number(10));
+
+create table doctor
+(
+did number(2) primary key,
+dname varchar2(20),
+speciality varchar2(20),
+age number(2) not null,
+mobile integer,
+gender varchar2(6));
+
+create table customer
+(
+pid number(3) primary key,
+name varchar2(20),
+sex varchar2(6),
+city varchar2(20),
+phone integer,
+age number(2),
+did references doctor(did) on delete set null);
+
+create table manufacturer
+(
+cid number(4) primary key,
+name varchar2(20),
+email varchar2(20),
+mobile integer,
+city varchar2(20),
+pharid references pharmacy(phid) on delete set null);
+
+create table mediquipment
+(
+code number(5) primary key,
+Trade_name varchar2(20),
+Product_Type varchar2(20),
+Mfg_date date,
+Exp_date date,
+price number(10,2),
+cid references manufacturer(cid) on delete set null);
+
+create table supplier
+(
+name varchar2(20),
+city varchar2(20),
+mobile integer primary key,
+email varchar2(20),
+cid references manufacturer(cid) on delete set null,
+pharid references pharmacy(phid) on delete set null);
+
+create table employee
+(
+name varchar2(20),
+city varchar2(20),
+doj date,
+mobile integer primary key,
+salary number(10),
+age number(2),
+sex varchar2(1),
+pharid references pharmacy(phid) on delete set null);
+
+create table hospital
+(
+hid number(2) primary key,
+name varchar2(20),
+email varchar2(40),
+phone integer,
+city varchar2(20),
+pharid references pharmacy(phid) on delete set null);
+
+create table bill
+(
+bid number(3) primary key,
+DOB date,
+age number(3),
+pname varchar2(20),
+mobile integer,
+city varchar2(20),
+product varchar2(20),
+amount number(10,2),
+pharid references pharmacy(phid) on delete set null);
+
+create table works
+(
+pharid references pharmacy(phid) on delete cascade,
+start_date date,
+end_date date,
+primary key(pharid));
+
+create table contract
+(
+pharid references pharmacy(phid) on delete cascade,
+cid references manufacturer(cid) on delete cascade,
+start_date date,
+end_date date,
+primary key(pharid,cid));
+
+create table prescribe
+(
+DOP date,
+medicine varchar2(20),
+did references doctor(did) on delete cascade,
+pid references customer(pid) on delete cascade,
+primary key(pid,did));
